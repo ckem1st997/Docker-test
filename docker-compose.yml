@@ -2,11 +2,17 @@ version: '3.4'
 services:
   sqlserver:
     image: mcr.microsoft.com/mssql/server
-    container_name: MsSqlServer
+    container_name: sqlServer
     environment:
      - ACCEPT_EULA=Y
      - SA_PASSWORD=Password_01
     ports:
      - "1433:1433"
     volumes:
-     - ./src:/var/opt/mssql/data
+     - ./src/sqlserver:/var/opt/mssql/data
+  redis:
+    image: redis:alpine
+    ports:
+    - "6379:6379"
+    volumes:
+    - ./src/redis:/data/db
